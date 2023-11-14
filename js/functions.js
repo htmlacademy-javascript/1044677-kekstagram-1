@@ -9,6 +9,8 @@ const isPalindrome = (string) => {
   return (string === reversedString);
 };
 
+isPalindrome();
+
 
 const getNumber = (string) => {
   string = string.toString();
@@ -22,17 +24,23 @@ const getNumber = (string) => {
   return (parseInt(data, 10));
 };
 
+getNumber();
 
-function getString (string, lengthMin, addString) {
-  addString = addString.slice(0, 3);
-  if (string.length > lengthMin) {
+
+const getString = (string, lengthMin, addString) => {
+  const currentAddString = lengthMin - string.length;
+  if (string.length >= lengthMin || currentAddString <= 0) {
     return string;
   }
-return addString + string
+  const cutAddString = addString.slice(0, currentAddString % addString.length);
+  const repeatAddString = addString.repeat(currentAddString / addString.length);
+
+  return cutAddString + repeatAddString + string;
 };
 
+getString();
 
 
-const isLengthAcceptable = (string, length) => {
-  return (string.length <= length);
-}
+const isLengthAcceptable = (string, length) => (string.length <= length);
+
+isLengthAcceptable();
