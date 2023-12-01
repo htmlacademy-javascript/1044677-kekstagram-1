@@ -93,7 +93,7 @@ const createCommentText = () => Array.from({length: getRandomInteger(1, 3)},() =
 
 const createComment = () => ({
   id: generateCommentId(),
-  avatar: `img/avatar- ${getRandomInteger(1, AVATARS_COUNT)}.svg`,
+  avatar: `img/avatar-${getRandomInteger(1, AVATARS_COUNT)}.svg`,
   message: createCommentText(),
   name: `${getRandomArrayElement(NAMES) } ${ getRandomArrayElement(SURNAMES)}`,
 }
