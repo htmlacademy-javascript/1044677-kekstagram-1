@@ -6,7 +6,7 @@ const createMiniature = ({url, likes, comments}) => {
   const miniature = miniatureTemplate.cloneNode(true);
   miniature.querySelector('.picture__img').src = url;
   miniature.querySelector('.picture__likes').textContent = likes;
-  miniature.querySelector('.picture__comments').textContent = comments;
+  miniature.querySelector('.picture__comments').textContent = comments.length;
   return miniature;
 };
 const getMiniatures = (photos) => {
