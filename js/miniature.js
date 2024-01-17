@@ -10,7 +10,7 @@ const createMiniature = ({url, likes, comments, description}) => {
   miniature.querySelector('.picture__comments').textContent = comments.length;
   return miniature;
 };
-const getMiniatures = (photos) => {
+const renderMiniatures = (photos) => {
   const fragment = document.createDocumentFragment();
   photos.forEach((photo) => {
     const miniature = createMiniature(photo);
@@ -19,4 +19,4 @@ const getMiniatures = (photos) => {
   box.append(fragment);
 };
 
-export {getMiniatures};
+export {renderMiniatures};
