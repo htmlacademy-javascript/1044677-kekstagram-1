@@ -32,9 +32,7 @@ const renderComments = (comments) => {
   }
 
   const fragment = document.createDocumentFragment();
-  console.log(commentsShown);
   for (let i = 0; i < commentsShown; i++) {
-    console.log(comments[i]);
     const commentElement = createComment(comments[i]);
     fragment.append(commentElement);
   }
