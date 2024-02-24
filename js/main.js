@@ -1,4 +1,4 @@
 import { getPhotos } from './data.js';
-import { renderMiniatures } from './miniature.js';
+import { renderGallery } from './gallery.js';
 
-renderMiniatures(getPhotos());
+renderGallery(getPhotos());
