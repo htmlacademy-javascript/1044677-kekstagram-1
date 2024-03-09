@@ -1,6 +1,6 @@
 import { isEscapeKey } from './util.js';
 
-const COMMENTS_PER_PORTION = 3;
+const COMMENTS_PER_PORTION = 5;
 const bigPhoto = document.querySelector('.big-picture');
 const cancelButton = document.querySelector('.big-picture__cancel');
 const commentsLoader = document.querySelector('.comments-loader');
@@ -77,7 +77,6 @@ const showBigPhoto = (data) => {
   bigPhoto.classList.remove('hidden');
   body.classList.add('modal-open');
   commentsLoader.classList.add('hidden');
-  commentCount.classList.add('hidden');
   document.addEventListener('keydown', onDocumentKeydown);
 
   renderPhotoDetails(data);
