@@ -1,6 +1,6 @@
 import { isEscapeKey } from './util.js';
 
-const COMMENTS_PER_PORTION = 3;
+const COMMENTS_PER_PORTION = 5;
 const bigPhoto = document.querySelector('.big-picture');
 const cancelButton = document.querySelector('.big-picture__cancel');
 const commentsLoader = document.querySelector('.comments-loader');
@@ -39,6 +39,7 @@ const renderComments = (comments) => {
 
   commentList.innerHTML = '';
   commentList.append(fragment);
+  console.log(1);
   commentCount.innerHTML = `${commentsShown} из <span class='comments-count'>${comments.length}</span> комментариев`;
 };
 
