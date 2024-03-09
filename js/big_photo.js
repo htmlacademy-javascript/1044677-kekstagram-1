@@ -77,7 +77,6 @@ const showBigPhoto = (data) => {
   bigPhoto.classList.remove('hidden');
   body.classList.add('modal-open');
   commentsLoader.classList.add('hidden');
-  commentCount.classList.add('hidden');
   document.addEventListener('keydown', onDocumentKeydown);
 
   renderPhotoDetails(data);
