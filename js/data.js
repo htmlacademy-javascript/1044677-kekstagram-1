@@ -71,15 +71,15 @@ const SURNAMES = [
 
 const generateCommentId = createIdGenerator();
 
-const createCommentText = () => Array.from({length: getRandomInteger(1, 3)},() =>
+const createCommentDataText = () => Array.from({length: getRandomInteger(1, 3)},() =>
   getRandomArrayElement(COMMENTS_TEXT)
 ).join(' ');
 
 
-const createComment = () => ({
+const createCommentData = () => ({
   id: generateCommentId(),
   avatar: `img/avatar-${getRandomInteger(1, AVATARS_COUNT)}.svg`,
-  message: createCommentText(),
+  message: createCommentDataText(),
   name: `${getRandomArrayElement(NAMES) } ${ getRandomArrayElement(SURNAMES)}`,
 }
 );
@@ -87,11 +87,11 @@ const createComment = () => ({
 const generatePhoto = (index) => ({
   id: index,
   url: `photos/${index}.jpg`,
-  description: getRandomArrayElement(PHOTOS_DESCRIPTIONS),
+  description: PHOTOS_DESCRIPTIONS[index - 1],
   likes: getRandomInteger(MIN_LIKES_COUNT, MAX_LIKES_COUNT),
   comments: Array.from(
     {length: getRandomInteger(0, COMMENTS_COUNT)},
-    createComment
+    createCommentData
   ),
 });
 
@@ -99,4 +99,4 @@ const getPhotos = () => Array.from({length: PHOTOS_COUNT}, (_, photoIndex) =>
   generatePhoto(photoIndex + 1)
 );
 
-export {getPhotos};
+export {getPhotos, COMMENTS_TEXT};
