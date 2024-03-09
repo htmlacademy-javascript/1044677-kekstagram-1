@@ -67,6 +67,12 @@ const renderPhotoDetails = ({ url, likes, description }) => {
   bigPhoto.querySelector('.social__caption').textContent = description;
 };
 
+const showMoreComments = (comments) => {
+  commentsLoader.addEventListener('click', () => {
+    renderComments(comments);
+  });
+};
+
 const showBigPhoto = (data) => {
   bigPhoto.classList.remove('hidden');
   body.classList.add('modal-open');
@@ -76,7 +82,9 @@ const showBigPhoto = (data) => {
 
   renderPhotoDetails(data);
   renderComments(data.comments);
+  showMoreComments(data.comments);
 };
+
 
 cancelButton.addEventListener('click', onCancelButtonClick);
 
