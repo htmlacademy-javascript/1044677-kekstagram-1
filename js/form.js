@@ -1,4 +1,3 @@
-// import Pristine from '../vendor/pristine/pristine.min.js';
 const MAX_HASHTAG_COUNT = 5;
 const VALID_SYMBOLS = /^#[a-za-яë0-9]{1,19}$/i;
 const errorText = {
@@ -17,8 +16,8 @@ const commentField = form.querySelector('.text_description');
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
-  errorTextParent: 'img-upload_field-wrapper',
-  errorTextClass: 'img-upload__field-wrapper_error',
+  errorTextParent: 'img-upload__field-wrapper',
+  errorTextClass: 'img-upload__field-wrapper__error',
 });
 
 
@@ -66,12 +65,12 @@ const onCancelButtonClick = () => {
 };
 
 const onFileInputChange = () => {
-  console.log('slkjs');
   showModal();
 };
 
 const onFormSubmit = (evt) => {
   evt.preventDefault();
+  console.log(pristine);
   pristine.validate();
 };
 
