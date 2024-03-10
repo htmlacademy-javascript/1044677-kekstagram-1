@@ -70,7 +70,6 @@ const onFileInputChange = () => {
 
 const onFormSubmit = (evt) => {
   evt.preventDefault();
-  console.log(pristine);
   pristine.validate();
 };
 
