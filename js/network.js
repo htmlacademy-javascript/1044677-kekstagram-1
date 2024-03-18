@@ -24,9 +24,9 @@ const request = async (url, method = HttpMethod.GET, body = null) => {
   return response.json();
 };
 
-const loadPhotos = async () => request(SERVER + Route.GET_DATA);
+const loadPhotos = async () => await request(SERVER + Route.GET_DATA);
 const sendPhotos = async (body) => {
-  request(
+  await request(
     SERVER + Route.SEND_DATA,
     HttpMethod.POST,
     body,
