@@ -1,10 +1,10 @@
-/* eslint-disable no-use-before-define */
 import { resetScale } from './scale.js';
 import {
   init as initEffect,
   reset as resetEffect } from './effect.js';
 import { sendPhotos } from './network.js';
 import { isEscapeKey } from './util.js';
+import {showSuccessMessage, showErrorMessage} from './message.js';
 
 const MAX_HASHTAG_COUNT = 5;
 const VALID_SYMBOLS = /^#[a-za-яë0-9]{1,19}$/i;
@@ -28,38 +28,6 @@ const hashtagField = form.querySelector('.text__hashtags');
 const commentField = form.querySelector('.text_description');
 const submitButton = form.querySelector('.img-upload__submit');
 
-const successMessageElement = document
-  .querySelector ('#success')
-  .content.querySelector('.success');
-
-const errorMessageElement = document
-  .querySelector('#error')
-  .content.querySelector('.error');
-
-const hideMessage = () => {
-  const existsElement = document.querySelector('.success') || document.querySelector('.error');
-  existsElement.remove();
-  document.removeEventListener('keydown', onDocumentKeydown);
-};
-
-const onCloseButtonClick = () => hideMessage();
-
-const showMessage = (element, buttonClass) => {
-  document.body.append(element);
-  document.addEventListener('keydown', onDocumentKeydown);
-  element
-    .querySelector(buttonClass)
-    .addEventListener('click', onCloseButtonClick);
-};
-
-const showSuccessMessage = () => {
-  showMessage(successMessageElement, '.success__button');
-};
-
-const showErrorMessage = () => {
-  showMessage(errorMessageElement, '.error__button');
-};
-
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
@@ -71,13 +39,14 @@ const toggleSubmitButton = (isDisabled) => {
 
   if (isDisabled) {
     submitButton.textContent = SubmitButtonText.SENDING;
-  } submitButton.textContent = SubmitButtonText.IDLE;
+  } else {
+    submitButton.textContent = SubmitButtonText.IDLE;
+  }
 };
 
 const showModal = () => {
   overlay.classList.remove('hidden');
   body.classList.add('modal-open');
-  document.addEventListener('keydown', onDocumentKeydown);
 };
 
 const hideModal = () => {
@@ -87,20 +56,18 @@ const hideModal = () => {
   pristine.reset();
   overlay.classList.add('hidden');
   body.classList.remove('modal-open');
-  document.removeEventListener('keydown', onDocumentKeydown);
 };
 
 const isTextFieldFocused = () =>
   document.activeElement === hashtagField ||
   document.activeElement === commentField;
 
-function onDocumentKeydown(evt) {
-  if (isEscapeKey && !isTextFieldFocused()) {
+const onDocumentKeydown = (evt) => {
+  if (isEscapeKey(evt) && !isTextFieldFocused()) {
     evt.preventDefault();
     hideModal();
-    hideMessage();
   }
-}
+};
 
 const normalizeTags = (tagString) => tagString
   .trim()
@@ -172,3 +139,5 @@ fileField.addEventListener('change', onFileInputChange);
 cancelButton.addEventListener('click', onCancelButtonClick);
 form.addEventListener('submit', onFormSubmit);
 initEffect();
+
+export { onDocumentKeydown };
