@@ -11,6 +11,7 @@ const errorMessageElement = document
 const hideMessage = () => {
   const existsElement = document.querySelector('.success') || document.querySelector('.error');
   existsElement.remove();
+  document.removeEventListener('keydown',onDocumentKeydown);
 };
 
 const onCloseButtonClick = () => hideMessage();
@@ -19,12 +20,12 @@ const onBodyClick = () => {
   hideMessage();
 };
 
-const onDocumentKeydown = (evt) => {
+function onDocumentKeydown(evt) {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     hideMessage();
   }
-};
+}
 
 const showMessage = (element, buttonClass) => {
   document.body.append(element);

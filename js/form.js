@@ -47,6 +47,7 @@ const toggleSubmitButton = (isDisabled) => {
 const showModal = () => {
   overlay.classList.remove('hidden');
   body.classList.add('modal-open');
+  document.addEventListener('keydown', onDocumentKeydown);
 };
 
 const hideModal = () => {
@@ -56,18 +57,19 @@ const hideModal = () => {
   pristine.reset();
   overlay.classList.add('hidden');
   body.classList.remove('modal-open');
+  document.removeEventListener('keydown', onDocumentKeydown);
 };
 
 const isTextFieldFocused = () =>
   document.activeElement === hashtagField ||
   document.activeElement === commentField;
 
-const onDocumentKeydown = (evt) => {
+function onDocumentKeydown(evt) {
   if (isEscapeKey(evt) && !isTextFieldFocused()) {
     evt.preventDefault();
     hideModal();
   }
-};
+}
 
 const normalizeTags = (tagString) => tagString
   .trim()
