@@ -12,6 +12,7 @@ const createMiniature = ({url, likes, comments, description, id}) => {
   return miniature;
 };
 const renderMiniatures = (photos) => {
+  box.querySelectorAll('.picture').forEach((element) => element.remove());
   const fragment = document.createDocumentFragment();
   photos.forEach((photo) => {
     const miniature = createMiniature(photo);

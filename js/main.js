@@ -1,8 +1,8 @@
-// import { getPhotos } from './data.js';
 import { renderGallery } from './gallery.js';
 import './form.js';
 import { loadPhotos } from './network.js';
-import { showError } from './util.js';
+import { showError, debounce } from './util.js';
+import { init, getFilteredPhotos } from './sort.js';
 
 const bootstrap = async () => {
   try {
@@ -14,3 +14,12 @@ const bootstrap = async () => {
 };
 
 bootstrap();
+
+try {
+  const photos = await loadPhotos();
+  const debouncedRenderGallery = debounce(renderGallery);
+  init(photos, debouncedRenderGallery);
+  renderGallery(getFilteredPhotos());
+} catch (err) {
+  showError(err.message);
+}
