@@ -3,6 +3,7 @@ import './form.js';
 import { loadPhotos } from './network.js';
 import { showError, debounce } from './util.js';
 import { init, getFilteredPhotos } from './sort.js';
+import './upload.js';
 
 const bootstrap = async () => {
   try {
