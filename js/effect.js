@@ -52,7 +52,7 @@ const effectToSliderOptions = {
     step: 1,
   },
   [Effect.PHOBOS]: {
-    min:0,
+    min: 0,
     max: 3,
     step: 0.1,
   },

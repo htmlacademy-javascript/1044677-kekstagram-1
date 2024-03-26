@@ -1,9 +1,9 @@
 import { resetScale } from './scale.js';
+import { isEscapeKey } from './util.js';
+import { sendPhotos } from './network.js';
 import {
   init as initEffect,
   reset as resetEffect } from './effect.js';
-import { sendPhotos } from './network.js';
-import { isEscapeKey } from './util.js';
 import {showSuccessMessage, showErrorMessage} from './message.js';
 
 const MAX_HASHTAG_COUNT = 5;
@@ -21,12 +21,12 @@ const SubmitButtonText = {
 
 const body = document.querySelector('body');
 const form = document.querySelector('.img-upload__form');
-const overlay = form.querySelector('.img-upload__overlay');
-const cancelButton = form.querySelector('.img-upload__cancel');
 const fileField = form.querySelector('.img-upload__input');
 const hashtagField = form.querySelector('.text__hashtags');
-const commentField = form.querySelector('.text_description');
+const overlay = form.querySelector('.img-upload__overlay');
+const commentField = form.querySelector('.text__description');
 const submitButton = form.querySelector('.img-upload__submit');
+const cancelButton = form.querySelector('.img-upload__cancel');
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
@@ -85,13 +85,9 @@ const hasUniqueTags = (value) => {
   return lowerCaseTags.length === new Set(lowerCaseTags).size;
 };
 
-const onCancelButtonClick = () => {
-  hideModal();
-};
+const onCancelButtonClick = () => hideModal();
 
-const onFileInputChange = () => {
-  showModal();
-};
+const onFileInputChange = () => showModal();
 
 const sendForm = async (formElement) => {
   if (!pristine.validate()) {

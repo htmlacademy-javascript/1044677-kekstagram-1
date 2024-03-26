@@ -16,9 +16,7 @@ const hideMessage = () => {
 
 const onCloseButtonClick = () => hideMessage();
 
-const onBodyClick = () => {
-  hideMessage();
-};
+const onBodyClick = () => hideMessage();
 
 function onDocumentKeydown(evt) {
   if (isEscapeKey(evt)) {
@@ -36,13 +34,9 @@ const showMessage = (element, buttonClass) => {
     .addEventListener('click', onCloseButtonClick);
 };
 
-const showSuccessMessage = () => {
-  showMessage(successMessageElement, '.success__button');
-};
+const showSuccessMessage = () => showMessage(successMessageElement, '.success__button');
 
-const showErrorMessage = () => {
-  showMessage(errorMessageElement, '.error__button');
-};
+const showErrorMessage = () => showMessage(errorMessageElement, '.error__button');
 
 
 export { showSuccessMessage, showErrorMessage};
