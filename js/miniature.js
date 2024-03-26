@@ -1,7 +1,9 @@
 const miniatureTemplate = document
   .querySelector('#picture')
   .content.querySelector('.picture');
+
 const box = document.querySelector('.pictures');
+
 const createMiniature = ({url, likes, comments, description, id}) => {
   const miniature = miniatureTemplate.cloneNode(true);
   miniature.querySelector('.picture__img').src = url;
@@ -11,6 +13,7 @@ const createMiniature = ({url, likes, comments, description, id}) => {
   miniature.dataset.miniatureId = id;
   return miniature;
 };
+
 const renderMiniatures = (photos) => {
   box.querySelectorAll('.picture').forEach((element) => element.remove());
   const fragment = document.createDocumentFragment();
@@ -20,6 +23,5 @@ const renderMiniatures = (photos) => {
   });
   box.append(fragment);
 };
-
 
 export {renderMiniatures};

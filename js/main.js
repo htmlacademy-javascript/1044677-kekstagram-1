@@ -1,9 +1,9 @@
-import { renderGallery } from './gallery.js';
 import './form.js';
+import './upload.js';
 import { loadPhotos } from './network.js';
+import { renderGallery } from './gallery.js';
 import { showError, debounce } from './util.js';
 import { init, getFilteredPhotos } from './sort.js';
-import './upload.js';
 
 const bootstrap = async () => {
   try {

@@ -25,6 +25,7 @@ const request = async (url, method = HttpMethod.GET, body = null) => {
 };
 
 const loadPhotos = async () => await request(SERVER + Route.GET_DATA);
+
 const sendPhotos = async (body) => {
   await request(
     SERVER + Route.SEND_DATA,
