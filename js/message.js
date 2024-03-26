@@ -10,7 +10,9 @@ const errorMessageElement = document
 
 const hideMessage = () => {
   const existsElement = document.querySelector('.success') || document.querySelector('.error');
-  existsElement.remove();
+  if (existsElement) {
+    existsElement.remove();
+  }
   document.removeEventListener('keydown',onDocumentKeydown);
 };
 
