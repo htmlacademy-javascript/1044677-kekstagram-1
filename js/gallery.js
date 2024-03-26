@@ -1,4 +1,4 @@
-import { showBigPhoto } from './big_photo.js';
+import { showBigPhoto } from './big-photo.js';
 import { renderMiniatures } from './miniature.js';
 
 const box = document.querySelector('.pictures');
