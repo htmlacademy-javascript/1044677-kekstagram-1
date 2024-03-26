@@ -7,7 +7,7 @@ const HttpMethod = {
 
 const Route = {
   GET_DATA: '/data',
-  SEND_DATA: '/333',
+  SEND_DATA: '/',
 };
 
 const ErrorText = {
