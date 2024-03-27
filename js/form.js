@@ -49,7 +49,7 @@ const toggleSubmitButton = (isDisabled) => {
 const showModal = () => {
   overlay.classList.remove('hidden');
   body.classList.add('modal-open');
-  document.addEventListener('keydown', onDocumentKeydown);
+  overlay.addEventListener('keydown', onDocumentKeydown);
 };
 
 const hideModal = () => {
@@ -59,7 +59,7 @@ const hideModal = () => {
   pristine.reset();
   overlay.classList.add('hidden');
   body.classList.remove('modal-open');
-  document.removeEventListener('keydown', onDocumentKeydown);
+  overlay.removeEventListener('keydown', onDocumentKeydown);
 };
 
 const isTextFieldFocused = () =>
