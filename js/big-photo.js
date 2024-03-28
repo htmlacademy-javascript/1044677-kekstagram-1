@@ -7,7 +7,7 @@ const commentsLoader = document.querySelector('.comments-loader');
 const commentCount = document.querySelector('.social__comment-count');
 const body = document.querySelector('body');
 const commentList = document.querySelector('.social__comments');
-let commentsShown = 0;
+let commentsShown = COMMENTS_PER_PORTION;
 
 const commentTemplate = document.querySelector('.social__comment');
 
@@ -23,7 +23,6 @@ const createComment = ({avatar, name, message}) => {
 };
 
 const renderComments = (comments) => {
-  commentsShown += COMMENTS_PER_PORTION;
   if(commentsShown >= comments.length) {
     commentsLoader.classList.add('hidden');
     commentsShown = comments.length;
@@ -46,7 +45,8 @@ const hideBigPhoto = () => {
   bigPhoto.classList.add('hidden');
   body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
-  commentsShown = 0;
+  document.removeEventListener('click',this);
+  commentsShown = 5;
 };
 
 function onDocumentKeydown(evt) {
@@ -69,6 +69,7 @@ const renderPhotoDetails = ({ url, likes, description }) => {
 
 const showMoreComments = (comments) => {
   commentsLoader.addEventListener('click', () => {
+    commentsShown += COMMENTS_PER_PORTION;
     renderComments(comments);
   });
 };
@@ -78,7 +79,6 @@ const showBigPhoto = (data) => {
   body.classList.add('modal-open');
   commentsLoader.classList.add('hidden');
   document.addEventListener('keydown', onDocumentKeydown);
-
   renderPhotoDetails(data);
   renderComments(data.comments);
   showMoreComments(data.comments);

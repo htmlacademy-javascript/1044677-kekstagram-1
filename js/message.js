@@ -1,5 +1,6 @@
 import { isEscapeKey } from './util.js';
 
+const overlay = document.querySelector('.img-upload__overlay');
 const successMessageElement = document
   .querySelector ('#success')
   .content.querySelector('.success');
@@ -10,7 +11,9 @@ const errorMessageElement = document
 
 const hideMessage = () => {
   const existsElement = document.querySelector('.success') || document.querySelector('.error');
-  existsElement.remove();
+  if (existsElement) {
+    existsElement.remove();
+  }
   document.removeEventListener('keydown',onDocumentKeydown);
 };
 
@@ -26,6 +29,7 @@ function onDocumentKeydown(evt) {
 }
 
 const showMessage = (element, buttonClass) => {
+
   document.body.append(element);
   document.body.addEventListener('click', onBodyClick);
   document.addEventListener('keydown', onDocumentKeydown);
@@ -36,7 +40,10 @@ const showMessage = (element, buttonClass) => {
 
 const showSuccessMessage = () => showMessage(successMessageElement, '.success__button');
 
-const showErrorMessage = () => showMessage(errorMessageElement, '.error__button');
+const showErrorMessage = () => {
+  overlay.removeEventListener('keydown', onDocumentKeydown);
+  showMessage(errorMessageElement, '.error__button');
+};
 
 
 export { showSuccessMessage, showErrorMessage};
