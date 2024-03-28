@@ -23,7 +23,6 @@ const createComment = ({avatar, name, message}) => {
 };
 
 const renderComments = (comments) => {
-  console.log(commentsShown);
   if(commentsShown >= comments.length) {
     commentsLoader.classList.add('hidden');
     commentsShown = comments.length;
@@ -48,7 +47,6 @@ const hideBigPhoto = () => {
   document.removeEventListener('keydown', onDocumentKeydown);
   document.removeEventListener('click',this);
   commentsShown = 5;
-  console.log(commentsShown);
 };
 
 function onDocumentKeydown(evt) {
