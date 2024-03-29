@@ -7,7 +7,8 @@ const commentsLoader = document.querySelector('.comments-loader');
 const commentCount = document.querySelector('.social__comment-count');
 const body = document.querySelector('body');
 const commentList = document.querySelector('.social__comments');
-let commentsShown = COMMENTS_PER_PORTION;
+let comments = [];
+let commentsShown = 5;
 
 const commentTemplate = document.querySelector('.social__comment');
 
@@ -22,7 +23,7 @@ const createComment = ({avatar, name, message}) => {
   return comment;
 };
 
-const renderComments = (comments) => {
+const renderComments = () => {
   if(commentsShown >= comments.length) {
     commentsLoader.classList.add('hidden');
     commentsShown = comments.length;
@@ -45,7 +46,7 @@ const hideBigPhoto = () => {
   bigPhoto.classList.add('hidden');
   body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
-  document.removeEventListener('click',this);
+  document.removeEventListener('click',onLoaderButtonClick);
   commentsShown = 5;
 };
 
@@ -67,20 +68,24 @@ const renderPhotoDetails = ({ url, likes, description }) => {
   bigPhoto.querySelector('.social__caption').textContent = description;
 };
 
-const showMoreComments = (comments) => {
-  commentsLoader.addEventListener('click', () => {
-    commentsShown += COMMENTS_PER_PORTION;
-    renderComments(comments);
-  });
+function onLoaderButtonClick () {
+  commentsShown += COMMENTS_PER_PORTION;
+  renderComments(comments);
+}
+const showMoreComments = () => {
+  commentsLoader.addEventListener('click', onLoaderButtonClick);
 };
 
 const showBigPhoto = (data) => {
+  for (let i = 0; i <= commentsShown; i++) {
+    comments.push(data.comments[i]);
+  }
   bigPhoto.classList.remove('hidden');
   body.classList.add('modal-open');
   commentsLoader.classList.add('hidden');
   document.addEventListener('keydown', onDocumentKeydown);
   renderPhotoDetails(data);
-  renderComments(data.comments);
+  renderComments(comments);
   showMoreComments(data.comments);
 };
 
