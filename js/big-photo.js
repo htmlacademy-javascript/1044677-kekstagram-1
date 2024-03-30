@@ -6,7 +6,6 @@ const body = document.querySelector('body');
 const cancelButton = bigPhoto.querySelector('.big-picture__cancel');
 const commentsLoader = bigPhoto.querySelector('.comments-loader');
 const commentsCount = bigPhoto.querySelector('.social__comment-count');
-const totalCommentsCount = document.querySelector('.comments-count');
 const commentList = bigPhoto.querySelector('.social__comments');
 const commentTemplate = document.querySelector('.social__comment');
 let comments = [];
