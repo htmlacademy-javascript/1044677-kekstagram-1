@@ -6,12 +6,14 @@ import {
   reset as resetEffect } from './effect.js';
 import {showSuccessMessage, showErrorMessage} from './message.js';
 
+const MAX_COMMENT_LENGTH = 140;
 const MAX_HASHTAG_COUNT = 5;
 const VALID_SYMBOLS = /^#[a-za-яë0-9]{1,19}$/i;
 const ErrorText = {
   INVALID_COUNT: `Вы можете добавить лишь ${MAX_HASHTAG_COUNT} хэштегов`,
   NOT_UNIQUE: 'Хэштеги должны быть уникальными',
   INVALID_PATTERN: 'Неправильный хэштег',
+  INVALID_LENGTH: ' Максимум 140 символов',
 };
 
 const SubmitButtonText = {
@@ -47,7 +49,7 @@ const toggleSubmitButton = (isDisabled) => {
 const showModal = () => {
   overlay.classList.remove('hidden');
   body.classList.add('modal-open');
-  document.addEventListener('keydown', onDocumentKeydown);
+  overlay.addEventListener('keydown', onDocumentKeydown);
 };
 
 const hideModal = () => {
@@ -57,7 +59,7 @@ const hideModal = () => {
   pristine.reset();
   overlay.classList.add('hidden');
   body.classList.remove('modal-open');
-  document.removeEventListener('keydown', onDocumentKeydown);
+  overlay.removeEventListener('keydown', onDocumentKeydown);
 };
 
 const isTextFieldFocused = () =>
@@ -79,6 +81,8 @@ const normalizeTags = (tagString) => tagString
 const hasValidTags = (value) => normalizeTags(value).every((tag) => VALID_SYMBOLS.test(tag));
 
 const hasValidCount = (value) => normalizeTags(value).length <= MAX_HASHTAG_COUNT;
+
+const hasValidCommentLength = () => commentField.value.length <= MAX_COMMENT_LENGTH;
 
 const hasUniqueTags = (value) => {
   const lowerCaseTags = normalizeTags(value).map((tag) => tag.toLowerCase());
@@ -110,6 +114,14 @@ const onFormSubmit = (evt) => {
   evt.preventDefault();
   sendForm(evt.target);
 };
+
+pristine.addValidator(
+  commentField,
+  hasValidCommentLength,
+  ErrorText.INVALID_LENGTH,
+  4,
+  true
+);
 
 pristine.addValidator(
   hashtagField,
