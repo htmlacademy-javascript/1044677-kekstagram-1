@@ -41,11 +41,7 @@ const renderComments = () => {
 
   commentList.innerHTML = '';
   commentList.append(fragment);
-
-  commentsCount.textContent = commentsShown;
-  // console.log(commentsShown);
-  totalCommentsCount.textContent = comments.length;
-  // console.log(comments.length);
+  commentsCount.innerHTML = `${commentsShown} из ${comments.length} комментариев`;
 };
 
 const hideBigPhoto = () => {
