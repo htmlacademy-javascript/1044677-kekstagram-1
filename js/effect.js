@@ -63,12 +63,12 @@ const effectToSliderOptions = {
   },
 };
 
-const modalElement = document.querySelector('.img-upload');
-const imageElement = modalElement.querySelector('.img-upload__preview img');
-const effectsElement = modalElement.querySelector('.effects');
-const sliderElement = modalElement.querySelector('.effect-level__slider');
-const sliderContainerElement = modalElement.querySelector('.img-upload__effect-level') ;
-const effectLevelElement = modalElement.querySelector('.effect-level__value');
+const modalWindow = document.querySelector('.img-upload');
+const imagePreview = modalWindow.querySelector('.img-upload__preview img');
+const imageEffects = modalWindow.querySelector('.effects');
+const effectSlider = modalWindow.querySelector('.effect-level__slider');
+const sliderContainer = modalWindow.querySelector('.img-upload__effect-level') ;
+const effectLevel = modalWindow.querySelector('.effect-level__value');
 
 let chosenEffect = Effect.DEFAULT;
 
@@ -76,31 +76,31 @@ const isDefault = () => chosenEffect === Effect.DEFAULT;
 
 const setImageStyle = () => {
   if (isDefault()) {
-    imageElement.style.filter = null;
+    imagePreview.style.filter = null;
     return;
   }
-  const { value } = effectLevelElement;
+  const { value } = effectLevel;
   const { style, unit } = effectToFilter[chosenEffect];
-  imageElement.style.filter = `${style}(${value}${unit})`;
-  imageElement.classList = [];
-  imageElement.classList.add(`effects__preview--${style}`);
+  imagePreview.style.filter = `${style}(${value}${unit})`;
+  imagePreview.classList = [];
+  imagePreview.classList.add(`effects__preview--${style}`);
 };
 
 const showSlider = () => {
-  sliderContainerElement.classList.remove('hidden');
+  sliderContainer.classList.remove('hidden');
 };
 
 const hideSlider = () => {
-  sliderContainerElement.classList.add('hidden');
+  sliderContainer.classList.add('hidden');
 };
 
 const onSliderUpdate = () => {
-  effectLevelElement.value = sliderElement.noUiSlider.get();
+  effectLevel.value = effectSlider.noUiSlider.get();
   setImageStyle();
 };
 
 const createSlider = ({ min, max, step }) => {
-  noUiSlider.create(sliderElement, {
+  noUiSlider.create(effectSlider, {
     range: { min, max },
     step,
     start: max,
@@ -110,12 +110,12 @@ const createSlider = ({ min, max, step }) => {
       from: (value) => Number (value),
     }
   });
-  sliderElement.noUiSlider.on('update', onSliderUpdate);
+  effectSlider.noUiSlider.on('update', onSliderUpdate);
   hideSlider();
 };
 
 const updateSlider = ({ min, max, step }) => {
-  sliderElement.noUiSlider.updateOptions({
+  effectSlider.noUiSlider.updateOptions({
     range: { min, max },
     step,
     start: max,
@@ -147,7 +147,7 @@ const onEffectsChange = (evt) => {
 
 const init = () => {
   createSlider(effectToSliderOptions[chosenEffect]) ;
-  effectsElement.addEventListener('change', onEffectsChange);
+  imageEffects.addEventListener('change', onEffectsChange);
 };
 
 export { init, reset };
