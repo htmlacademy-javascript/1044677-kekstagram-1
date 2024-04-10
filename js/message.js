@@ -15,11 +15,17 @@ const hideMessage = () => {
     existsMessage.remove();
   }
   document.removeEventListener('keydown',onDocumentKeydown);
+  document.removeEventListener('click',onCloseButtonClick);
+  document.body.removeEventListener('click', onBodyClick);
 };
 
-const onCloseButtonClick = () => hideMessage();
+function onCloseButtonClick () {
+  hideMessage();
+}
 
-const onBodyClick = () => hideMessage();
+function onBodyClick () {
+  hideMessage();
+}
 
 function onDocumentKeydown(evt) {
   if (isEscapeKey(evt)) {
